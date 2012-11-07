@@ -1,0 +1,150 @@
+minetest.env:add_node(pos, {name="mod:stein"})
+
+
+
+minetest.register_entity("mod:stein",{
+physical = false,
+	visual = "sprite",
+	textures = {"default_stone.png"},
+	collisionbox = {-0.5,-0.5,-0.5, 0.5,0.5,0.5},
+	visual = "cube",
+	
+
+
+	})
+	
+	
+	
+	
+minetest.register_node("mod:stein", {
+	description = "Stein",
+	tile_images = {"default_stone.png"},
+	is_ground_content = true,
+	groups = {cracky=3},
+	drop = 'default:cobble',
+	legacy_mineral = true,
+	sounds = default.node_sound_stone_defaults(),
+on_punch=function()
+stein="mod:stein"
+pos={x=12,y=12,z=12}
+valu=minetest.env.setpos(pos)
+end,
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+minetest.register_node("mod:leiter", {
+	description = "leiter",
+	drawtype = "raillike",
+	tile_images = {"default_ladder.png"},
+	inventory_image = "default_ladder.png",
+	wield_image = "default_ladder.png",
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	is_ground_content = true,
+	walkable = false,
+	climbable = true,
+	selection_box = {
+		type = "wallmounted",
+		--wall_top = = <default>
+		--wall_bottom = = <default>
+		--wall_side = = <default>
+	},
+	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=2},
+	legacy_wallmounted = true,
+	sounds = default.node_sound_wood_defaults(),
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--self.object:setacceleration({x=0, y=-10, z=0})
+
+minetest.register_entity("mod:rakete",
+{
+physical = true,
+walkable = true,
+textures={"default_dirt.png"},
+
+
+
+on_punch(self, puncher, time_from_last_punch, tool_capabilities, dir)=function(self,hitter){
+minetest.env:moveto(dir, continuous=false)
+
+return true
+end
+
+
+
+	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5}, -- TODO: make better collisionbox
+	visual = "cube",
+	climbable = true,
+	--drawtype = "signlike"
+--visual = "cube",
+	--textures = {"vehicles_cart_top.png", "vehicles_cart_side.png", "vehicles_cart_side.png", "vehicles_cart_side.png", "vehicles_cart_side.png", "vehicles_cart_side.png"},
+	attached_to = false,
+	time = 0.0,
+	vec = {x = 0, z = 0},
+	health = 3,
+	moving = false,
+	stopnow = false
+
+
+
+})
+
+minetest.register_craftitem("mod:rakete",{
+image="default_dirt.png",
+on_drop = function(item, dropper, pos)
+		minetest.env:add_entity({x = round(pos.x), y = round(pos.y), z = round(pos.z)}, "mod:rakete")
+		return true
+	end
+})
